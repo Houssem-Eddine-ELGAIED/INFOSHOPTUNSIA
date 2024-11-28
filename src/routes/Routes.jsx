@@ -8,7 +8,7 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ShippingPage from '../pages/ShippingPage';
 //import About from '../pages/About';  
-
+import Contact from '../pages/Contact';
 import PrivateRoute from '../components/PrivateRoute';
 import PaymentPage from '../pages/PaymentPage';
 import PlaceOrderPage from '../pages/PlaceOrderPage';
@@ -25,7 +25,7 @@ import UpdateUserFormPage from '../pages/admin/UpdateUserFormPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import AdminDashboard from '../AdminDashboard';
 import AdminLoginPage from '../pages/admin/AdminLoginPage';
-
+import Dashboard from '../pages/admin/Dashboard';
 import AdminProfilePage from '../pages/admin/AdminProfilePage';
 import AdminListPage from '../pages/admin/AdminListPage';
 import ResetPasswordRequestPage from '../pages/ResetPasswordRequestPage';
@@ -37,8 +37,8 @@ const RoutesComponent = () => {
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
-      
-
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
           <Route path="product/:id" element={<ProductPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="reset-password" element={<ResetPasswordRequestPage />} />
