@@ -1,15 +1,14 @@
 import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from '../App';
 import ProductPage from '../pages/ProductPage';
 import HomePage from '../pages/HomePage';
-
 import CartPage from '../pages/CartPage';
 import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import ShippingPage from '../pages/ShippingPage';
-import About from '../pages/About ';  
-import Contact from '../pages/Contact';
+//import About from '../pages/About';  
+
 import PrivateRoute from '../components/PrivateRoute';
 import PaymentPage from '../pages/PaymentPage';
 import PlaceOrderPage from '../pages/PlaceOrderPage';
@@ -26,153 +25,55 @@ import UpdateUserFormPage from '../pages/admin/UpdateUserFormPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import AdminDashboard from '../AdminDashboard';
 import AdminLoginPage from '../pages/admin/AdminLoginPage';
-import Dashboard from '../pages/admin/Dashboard';
+
 import AdminProfilePage from '../pages/admin/AdminProfilePage';
 import AdminListPage from '../pages/admin/AdminListPage';
 import ResetPasswordRequestPage from '../pages/ResetPasswordRequestPage';
 import ResetPasswordPage from '../pages/ResetPasswordPage';
 
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-    children: [
-      {
-        index: true,
-        path: '/',
-        element: <HomePage />
-      },
-
-     
-
-      {
-        path: '/about',  // Route pour la page About
-        element: <About />  // Référence à la page About
-      },
-
-      {
-        path: '/contact',  // Route pour la page Contact
-        element: <Contact />  // Référence à la page Contact
-      },
-
-     
-      {
-        path: '/product/:id',
-        element: <ProductPage />
-      },
-      {
-        path: '/cart',
-        element: <CartPage />
-      },
-      {
-        path: '/reset-password',
-        element: <ResetPasswordRequestPage />
-      },
-      {
-        path: '/reset-password/:id/:token',
-        element: <ResetPasswordPage />
-      },
-      {
-        path: '/login',
-        element: <LoginPage />
-      },
+const RoutesComponent = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<HomePage />} />
       
-      {
-        path: '/register',
-        element: <RegisterPage />
-      },
-      {
-        path: '',
-        element: <PrivateRoute />,
-        children: [
-          {
-            path: '/shipping',
-            element: <ShippingPage />
-          },
-         {
-            path: '/payment',
-             element: <PaymentPage />
-           },
-          {
-            path: '/place-order',
-            element: <PlaceOrderPage />
-          },
-          {
-            path: '/order/:id',
-            element: <OrderDetailsPage />
-          },
-          {
-            path: '/profile',
-            element: <ProfilePage />
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '/admin/login',
-    element: <AdminLoginPage />
-  },
-  {
-    path: '',
-    element: <AdminDashboard />,
-    children: [
-      {
-        path: '',
-        element: <AdminRoute />,
-        children: [
-          {
-            path: '/admin/dashboard',
-            element: <Dashboard />
-          },
-          {
-            path: '/admin/order-list',
-            element: <OrderListPage />
-          },
-          {
-            path: '/admin/product-list',
-            element: <ProductListPage />
-          },
-          {
-            path: '/admin/user-list',
-            element: <UserListPage />
-          },
-          {
-            path: '/admin/product/create',
-            element: <ProductFormPage />
-          },
-          {
-            path: '/admin/profile',
-            element: <AdminProfilePage />
-          },
-          {
-            path: '/admin/admin-list',
-            element: <AdminListPage />
-          },
-          {
-            path: '/admin/order/:id',
-            element: <OrderDetailsPage />
-          },
-          {
-            path: '/admin/user/update/:id',
-            element: <UpdateUserFormPage />
-          },
-          {
-            path: '/admin/product/update/:id',
-            element: <ProductFormPage />
-          }
-        ]
-      }
-    ]
-  },
-  {
-    path: '*',
-    element: <NotFoundPage />
-  }
-]);
-const Routes = () => {
-  return <RouterProvider router={router} />;
+
+          <Route path="product/:id" element={<ProductPage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="reset-password" element={<ResetPasswordRequestPage />} />
+          <Route path="reset-password/:id/:token" element={<ResetPasswordPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
+
+          <Route element={<PrivateRoute />}>
+            <Route path="shipping" element={<ShippingPage />} />
+            <Route path="payment" element={<PaymentPage />} />
+            <Route path="place-order" element={<PlaceOrderPage />} />
+            <Route path="order/:id" element={<OrderDetailsPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+          </Route>
+        </Route>
+
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+
+        <Route element={<AdminRoute />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/order-list" element={<OrderListPage />} />
+          <Route path="/admin/product-list" element={<ProductListPage />} />
+          <Route path="/admin/user-list" element={<UserListPage />} />
+          <Route path="/admin/product/create" element={<ProductFormPage />} />
+          <Route path="/admin/profile" element={<AdminProfilePage />} />
+          <Route path="/admin/admin-list" element={<AdminListPage />} />
+          <Route path="/admin/order/:id" element={<OrderDetailsPage />} />
+          <Route path="/admin/user/update/:id" element={<UpdateUserFormPage />} />
+          <Route path="/admin/product/update/:id" element={<ProductFormPage />} />
+        </Route>
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
-export default Routes;
+export default RoutesComponent;
